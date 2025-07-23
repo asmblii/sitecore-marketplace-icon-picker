@@ -1,69 +1,112 @@
-# React + TypeScript + Vite
+# Marketplace Icon Picker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern icon picker application for the Sitecore Marketplace, built with React and TypeScript. This application provides an intuitive interface for selecting and managing icons within the Sitecore ecosystem.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Icon Selection**: Browse and select icons with a user-friendly interface
+- **Sitecore Integration**: Seamless integration with Sitecore Marketplace SDK
+- **Real-time Feedback**: Live save status updates and error handling
+- **Modern UI**: Clean, responsive design built with Tailwind CSS and Radix UI
+- **TypeScript Support**: Full type safety throughout the application
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Core Framework
+- **React 19** - Modern React with latest features
+- **TypeScript** - Type-safe JavaScript development
+- **Vite** - Fast build tool and development server
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Sitecore Integration
+- **@sitecore-marketplace-sdk/client** (^0.1.4) - Sitecore Marketplace client SDK
+- **@sitecore-marketplace-sdk/xmc** (^0.1.7) - Sitecore XM Cloud integration
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### UI & Styling
+- **Tailwind CSS** (^4.1.11) - Utility-first CSS framework
+- **@tailwindcss/vite** (^4.1.11) - Vite integration for Tailwind
+- **Radix UI** (@radix-ui/react-slot ^1.2.3) - Unstyled, accessible UI primitives
+- **Lucide React** (^0.525.0) - Beautiful & consistent icon library
+- **Class Variance Authority** (^0.7.1) - CSS-in-TS variant API
+- **clsx** (^2.1.1) - Utility for constructing className strings
+- **tailwind-merge** (^3.3.1) - Merge Tailwind CSS classes without conflicts
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Development Tools
+- **ESLint** (^9.30.1) - Code linting and formatting
+- **TypeScript ESLint** (^8.35.1) - TypeScript-specific linting rules
+- **Vite** (^7.0.4) - Development server and build tool
+
+## 📦 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd marketplace-icon-picker
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+## 🏃‍♂️ Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run lint` - Run ESLint to check code quality
+- `npm run preview` - Preview the production build locally
+
+## 🔧 Development
+
+### Project Structure
+```
+src/
+├── components/
+│   └── ui/           # Reusable UI components
+├── utils/
+│   └── hooks/        # Custom React hooks
+├── lib/              # Utility functions
+└── assets/           # Static assets
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Key Components
+- **useMarketplaceClient** - Custom hook for Sitecore Marketplace SDK integration
+- **Button** - Reusable button component with Tailwind styling
+- **App** - Main application component with icon picker functionality
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔗 Sitecore Integration
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This application integrates with the Sitecore Marketplace using the official SDKs:
+
+- Retrieves application context from the marketplace
+- Saves icon selections with real-time feedback
+- Handles marketplace client initialization and error states
+- Provides seamless close app functionality after successful saves
+
+## 🎨 UI Components
+
+Built with modern, accessible components:
+- Radix UI primitives for accessibility
+- Tailwind CSS for responsive styling
+- Lucide React icons for consistent iconography
+- Custom button variants with loading and error states
+
+## 📝 License
+
+This project is licensed under the terms specified in the [LICENSE](LICENSE) file.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 🐛 Issues
+
+If you encounter any issues or have suggestions for improvements, please open an issue on the repository.
