@@ -38,7 +38,7 @@ function App() {
       setTimeout(() => {
         client?.closeApp();
       }, 1000);
-    } catch (error: unknown) {
+    } catch {
       setSaveStatus("error");
       // Reset error status after 3 seconds
       setTimeout(() => {
