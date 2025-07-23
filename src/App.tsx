@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import type { ApplicationContext } from "@sitecore-marketplace-sdk/client";
 import { useMarketplaceClient } from "./utils/hooks/useMarketplaceClient";
+import { Button } from "./components/ui/button";
 
 function App() {
   const { client, error, isInitialized } = useMarketplaceClient();
@@ -84,12 +85,12 @@ function App() {
           placeholder="Enter text here..."
           disabled={saveStatus === "saving"}
         />
-        <button 
+        <Button className="blue-500 text-white"
           onClick={handleSave}
           disabled={saveStatus === "saving" || saveStatus === "saved"}
         >
           {getSaveButtonText()}
-        </button>
+        </Button>
         {getSaveStatusMessage()}
       </div>
     </>
