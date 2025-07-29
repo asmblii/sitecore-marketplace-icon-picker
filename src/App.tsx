@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { ApplicationContext } from "@sitecore-marketplace-sdk/client";
 import { useMarketplaceClient } from "./utils/hooks/useMarketplaceClient";
 import { Button } from "./components/ui/button";
+import { Navigation } from "./components/Navigation";
 import icons from "./data/icons.json";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./components/ui/resizable";
 
 const NAV_ITEMS = [
   { key: "all", label: "All Icons" },
@@ -13,11 +15,6 @@ function App() {
   const [appContext, setAppContext] = useState<ApplicationContext>();
   const [selectedIcon, setSelectedIcon] = useState<string>("");
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
-
-  // Sidebar collapsed state for mobile
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  // For navigation filter, currently only "all"
   const [navSelected, setNavSelected] = useState("all");
 
   const [searchInput, setSearchInput] = useState("");
@@ -55,38 +52,21 @@ function App() {
 
   return (
     <>
-      {/* Global light mode styles */}
-      <style>
-        {`
-          body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
-          }
-          ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-          }
-          ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 4px;
-          }
-          ::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          .material-icons {
-            user-select: none;
-          }
-          button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-          }
-          input, button {
-            font-family: inherit;
-          }
-        `}
-      </style>
+      <ResizablePanelGroup direction="horizontal">
+        <ResizablePanel defaultSize={15}>
+          <Navigation 
+            navItems={NAV_ITEMS}
+            selectedNav={navSelected}
+            onNavSelect={setNavSelected}
+          />
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel>
+          <div>
+            <h1>Main Content</h1>
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
 
       <div
         style={{
@@ -95,66 +75,6 @@ function App() {
           overflow: "hidden",
         }}
       >
-        {/* Sidebar */}
-        <aside
-          style={{
-            backgroundColor: "#f8f9fa",
-            width: sidebarOpen ? 240 : 56,
-            transition: "width 0.3s ease",
-            boxShadow: "2px 0 10px rgba(0,0,0,0.1)",
-            color: "#666",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          {/* Toggle Button */}
-          <button
-            aria-label="Toggle sidebar"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#555",
-              cursor: "pointer",
-              fontSize: 24,
-              padding: 12,
-              alignSelf: sidebarOpen ? "flex-end" : "center",
-            }}
-            title="Toggle sidebar"
-          >
-            {sidebarOpen ? "⬅️" : "➡️"}
-          </button>
-
-          {/* Navigation */}
-          <nav style={{ flex: 1, marginTop: 16 }}>
-            {NAV_ITEMS.map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => setNavSelected(key)}
-                style={{
-                  width: "100%",
-                  padding: "12px 16px",
-                  textAlign: sidebarOpen ? "left" : "center",
-                  backgroundColor: navSelected === key ? "#2563eb" : "transparent",
-                  border: "none",
-                  color: navSelected === key ? "#fff" : "#666",
-                  cursor: "pointer",
-                  fontWeight: navSelected === key ? "bold" : "normal",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  borderRadius: 4,
-                  marginBottom: 8,
-                  transition: "background-color 0.2s",
-                }}
-                title={label}
-              >
-                {sidebarOpen ? label : label.charAt(0)}
-              </button>
-            ))}
-          </nav>
-        </aside>
-
         {/* Main Content */}
         <main
           style={{
