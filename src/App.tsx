@@ -11,7 +11,6 @@ const NAV_ITEMS = [
 function App() {
   const { client, error, isInitialized } = useMarketplaceClient();
   const [appContext, setAppContext] = useState<ApplicationContext>();
-  const [textValue, setTextValue] = useState<string>("");
   const [selectedIcon, setSelectedIcon] = useState<string>("");
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
@@ -45,7 +44,7 @@ function App() {
   const handleSave = async () => {
     setSaveStatus("saving");
     try {
-      await client?.setValue(JSON.stringify({ text: textValue, icon: selectedIcon }), true);
+      await client?.setValue(JSON.stringify({ icon: selectedIcon }), true);
       setSaveStatus("saved");
       setTimeout(() => client?.closeApp(), 1000);
     } catch {
@@ -56,21 +55,21 @@ function App() {
 
   return (
     <>
-      {/* Global dark mode styles */}
+      {/* Global light mode styles */}
       <style>
         {`
           body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: #ffffff;
+            color: #1a1a1a;
           }
           ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
           }
           ::-webkit-scrollbar-thumb {
-            background: #444;
+            background: #c1c1c1;
             border-radius: 4px;
           }
           ::-webkit-scrollbar-track {
@@ -99,11 +98,11 @@ function App() {
         {/* Sidebar */}
         <aside
           style={{
-            backgroundColor: "#1e1e1e",
+            backgroundColor: "#f8f9fa",
             width: sidebarOpen ? 240 : 56,
             transition: "width 0.3s ease",
-            boxShadow: "2px 0 10px rgba(0,0,0,0.7)",
-            color: "#bbb",
+            boxShadow: "2px 0 10px rgba(0,0,0,0.1)",
+            color: "#666",
             display: "flex",
             flexDirection: "column",
           }}
@@ -115,7 +114,7 @@ function App() {
             style={{
               background: "none",
               border: "none",
-              color: "#ccc",
+              color: "#555",
               cursor: "pointer",
               fontSize: 24,
               padding: 12,
@@ -138,7 +137,7 @@ function App() {
                   textAlign: sidebarOpen ? "left" : "center",
                   backgroundColor: navSelected === key ? "#2563eb" : "transparent",
                   border: "none",
-                  color: navSelected === key ? "#fff" : "#bbb",
+                  color: navSelected === key ? "#fff" : "#666",
                   cursor: "pointer",
                   fontWeight: navSelected === key ? "bold" : "normal",
                   whiteSpace: "nowrap",
@@ -164,31 +163,12 @@ function App() {
             display: "flex",
             flexDirection: "column",
             overflowY: "auto",
-            backgroundColor: "#181818",
+            backgroundColor: "#ffffff",
           }}
         >
-          <h1 style={{ marginBottom: 24, color: "#eee" }}>
+          <h1 style={{ marginBottom: 24, color: "#1a1a1a" }}>
             Welcome to {appContext?.name || "Marketplace App"}
           </h1>
-
-          {/* Text Input */}
-          <input
-            type="text"
-            placeholder="Enter text here..."
-            value={textValue}
-            disabled={saveStatus === "saving"}
-            onChange={(e) => setTextValue(e.target.value)}
-            style={{
-              fontSize: 16,
-              padding: "12px 16px",
-              borderRadius: 6,
-              border: "none",
-              marginBottom: 24,
-              backgroundColor: "#222",
-              color: "#eee",
-              boxShadow: "inset 0 0 5px #000",
-            }}
-          />
 
           {/* Search bar for filtering icons */}
           <input
@@ -200,20 +180,20 @@ function App() {
               fontSize: 16,
               padding: "10px 14px",
               borderRadius: 6,
-              border: "none",
+              border: "1px solid #d1d5db",
               marginBottom: 20,
-              backgroundColor: "#222",
-              color: "#eee",
-              boxShadow: "inset 0 0 5px #000",
+              backgroundColor: "#ffffff",
+              color: "#1a1a1a",
+              boxShadow: "inset 0 0 3px rgba(0,0,0,0.1)",
               transition: "box-shadow 0.3s ease",
               outline: "none",
               width: 320,
               maxWidth: "100%",
             }}
             onFocus={(e) =>
-              (e.currentTarget.style.boxShadow = "inset 0 0 8px #2563eb")
+              (e.currentTarget.style.boxShadow = "0 0 0 3px rgba(37, 99, 235, 0.1)")
             }
-            onBlur={(e) => (e.currentTarget.style.boxShadow = "inset 0 0 5px #000")}
+            onBlur={(e) => (e.currentTarget.style.boxShadow = "inset 0 0 3px rgba(0,0,0,0.1)")}
           />
 
           {/* Icon Grid */}
@@ -229,7 +209,7 @@ function App() {
             }}
           >
             {filteredIcons.length === 0 && (
-              <p style={{ color: "#888", gridColumn: "1 / -1" }}>
+              <p style={{ color: "#666", gridColumn: "1 / -1" }}>
                 No icons match your search.
               </p>
             )}
@@ -241,8 +221,8 @@ function App() {
                 onClick={() => setSelectedIcon(icon)}
                 style={{
                   cursor: "pointer",
-                  backgroundColor: selectedIcon === icon ? "#2563eb" : "#222",
-                  color: selectedIcon === icon ? "#fff" : "#bbb",
+                  backgroundColor: selectedIcon === icon ? "#2563eb" : "#f8f9fa",
+                  color: selectedIcon === icon ? "#fff" : "#374151",
                   borderRadius: 8,
                   display: "flex",
                   flexDirection: "column",
@@ -252,7 +232,7 @@ function App() {
                   boxShadow:
                     selectedIcon === icon
                       ? "0 0 10px 2px #2563ebaa"
-                      : "0 0 4px 0 #000 inset",
+                      : "0 1px 3px rgba(0,0,0,0.1)",
                   transition: "background-color 0.3s, box-shadow 0.3s, color 0.3s",
                   userSelect: "none",
                 }}
@@ -289,13 +269,13 @@ function App() {
             <div
               style={{
                 margin: "auto",
-                backgroundColor: "#222",
+                backgroundColor: "#f8f9fa",
                 padding: 24,
                 borderRadius: 16,
-                boxShadow: "0 0 20px #2563eb",
+                boxShadow: "0 0 20px rgba(37, 99, 235, 0.3)",
                 maxWidth: 280,
                 textAlign: "center",
-                color: "#eee",
+                color: "#1a1a1a",
               }}
             >
               <span className="material-icons" style={{ fontSize: 96 }}>
