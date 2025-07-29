@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import type { ApplicationContext } from "@sitecore-marketplace-sdk/client";
 import { useMarketplaceClient } from "./utils/hooks/useMarketplaceClient";
-import { Button } from "./components/ui/button";
 import { Navigation } from "./components/Navigation";
+import { IconPicker } from "./components/IconPicker";
 import icons from "./data/icons.json";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./components/ui/resizable";
-import { Input } from "./components/ui/input";
-import { Card } from "./components/ui/card";
+import "./App.css";
 
 const NAV_ITEMS = [
   { key: "all", label: "All Icons" },
@@ -64,75 +63,17 @@ function App() {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel>
-
-          <div className="flex h-screen overflow-hidden">
-            <main className="flex-1 p-6 flex flex-col overflow-y-auto">
-
-              <Input 
-                type="search"
-                placeholder="Search icons..."
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-
-              <div className="flex-1 grid grid-cols-[repeat(auto-fill,minmax(64px,64px))] gap-4 overflow-y-auto pr-3 pt-3 mb-8">
-                
-                {filteredIcons.length === 0 && (
-                  <p style={{ color: "#666", gridColumn: "1 / -1" }}>
-                    No icons match your search.
-                  </p>
-                )}
-
-                {filteredIcons.map((icon) => (
-                  <Card key={icon} 
-                        onClick={() => setSelectedIcon(icon)}
-                        style="outline"
-                        elevation="base">
-
-                    <span className="material-icons text-3xl pointer-events-none mb-1.5">
-                      {icon}
-                    </span>
-                    
-                    <small className="text-[11px] text-center">
-                      {icon}
-                    </small>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Selected Icon Preview */}
-              {selectedIcon && (
-                <div className="mx-auto bg-gray-50 p-6 rounded-2xl shadow-xl shadow-blue-500/30 max-w-[280px] text-center text-gray-900">
-                  <span className="material-icons text-[96px]">
-                    {selectedIcon}
-                  </span>
-                  <div className="mt-4 text-[22px] font-bold select-none">
-                    {selectedIcon}
-                  </div>
-                </div>
-              )}
-
-              {/* Save Button */}
-              <Button
-                variant="default"
-                colorScheme="primary"
-                onClick={handleSave}
-                disabled={saveStatus === "saving" || saveStatus === "saved" || !selectedIcon}
-                className="mt-8 max-w-[220px] self-center"
-              >
-                {saveStatus === "saving"
-                  ? "Saving..."
-                  : saveStatus === "saved"
-                    ? "Saved!"
-                    : saveStatus === "error"
-                      ? "Error - Try Again"
-                      : "Save"}
-              </Button>
-            </main>
-          </div>
+          <IconPicker
+            searchInput={searchInput}
+            onSearchChange={setSearchInput}
+            filteredIcons={filteredIcons}
+            selectedIcon={selectedIcon}
+            onIconSelect={setSelectedIcon}
+            onSave={handleSave}
+            saveStatus={saveStatus}
+          />
         </ResizablePanel>
       </ResizablePanelGroup>
-
     </>
   );
 }
