@@ -20,7 +20,7 @@ export function Navigation({ navItems, selectedNav, onNavSelect }: NavigationPro
           variant="ghost"
           colorScheme="neutral"
           onClick={() => onNavSelect(key)}
-          style={{ marginTop: 32, width: "100%", alignSelf: "center" }}
+          className="mt-8 w-full self-center rounded-none"
         >
           {label}
         </Button>
