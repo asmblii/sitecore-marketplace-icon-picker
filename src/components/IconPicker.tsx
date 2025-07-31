@@ -28,7 +28,10 @@ export function IconPicker({
           type="search"
           placeholder="Search icons..."
           value={searchInput}
-          onChange={(e) => onSearchChange(e.target.value)}
+          onChange={(e) => { 
+            onIconSelect("")
+            onSearchChange(e.target.value)
+          }}
         />
 
         <div className="flex-1 grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-3 overflow-y-auto pr-3 pt-3 mb-8">
@@ -42,40 +45,28 @@ export function IconPicker({
           {filteredIcons.map((icon) => (
             <Card key={icon} 
                   onClick={() => onIconSelect(icon)}
-                  className="cursor-pointer h-28 flex flex-col items-center justify-center text-center gap-1"
+                  className={`cursor-pointer h-28 flex flex-col items-center justify-center text-center gap-1 ${selectedIcon === icon ? "bg-primary/10" : ""}`}
                   style="outline"
                   elevation="base"
                   padding="sm">
 
-              <span className="material-icons md-48 pointer-events-none">
+              <span className={`material-icons md-48 pointer-events-none ${selectedIcon === icon ? "text-primary" : "text-neutral"}`}>
                 {icon}
               </span>
               
-              <small className="text-xs text-center leading-tight break-words hyphens-auto px-1">
+              <small className={`text-xs text-center leading-tight break-words hyphens-auto px-1 ${selectedIcon === icon ? "text-primary font-bold" : "text-neutral"}`}>
                 {icon.replaceAll("_", " ")}
               </small>
             </Card>
           ))}
         </div>
 
-        {/* Selected Icon Preview */}
-        {selectedIcon && (
-          <div className="mx-auto bg-gray-50 p-6 rounded-2xl shadow-xl shadow-blue-500/30 max-w-[280px] text-center text-gray-900">
-            <span className="material-icons md-48 pointer-events-none">
-              {selectedIcon}
-            </span>
-            <div className="mt-4 text-[22px] font-bold select-none">
-              {selectedIcon}
-            </div>
-          </div>
-        )}
-
         {/* Save Button */}
         <Button
           variant="default"
           colorScheme="primary"
           onClick={onSave}
-          disabled={saveStatus === "saving" || saveStatus === "saved" || !selectedIcon}
+          disabled={saveStatus === "saving" || saveStatus === "saved" || !selectedIcon || selectedIcon.length === 0}
           className="mt-8 max-w-[220px] self-center"
         >
           {saveStatus === "saving"

@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.3",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
+    "@radix-ui/react-slot": "^1.2.3",
     "@sitecore-marketplace-sdk/client": "^0.1.4",
     "@sitecore-marketplace-sdk/xmc": "^0.1.7",
     "@tailwindcss/vite": "^4.1.11",
@@ -21,7 +21,7 @@
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-resizable-panels": "^3.0.3",
+    "react-resizable-panels": "^3.0.4",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
