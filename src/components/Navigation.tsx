@@ -1,30 +1,28 @@
 import { Button } from "./ui/button";
-
-interface NavItem {
-  key: string;
-  label: string;
-}
+import type { CategoryItem } from "../types";
 
 interface NavigationProps {
-  navItems: NavItem[];
-  selectedNav: string;
-  onNavSelect: (key: string) => void;
+  navItems: CategoryItem[];
+  selectedNav: CategoryItem;
+  onNavSelect: (item: CategoryItem) => void;
 }
 
 export function Navigation({ navItems, selectedNav, onNavSelect }: NavigationProps) {
   return (
-    <nav style={{ flex: 1, marginTop: 16 }}>
-      {navItems.map(({ key, label }) => (
-        <Button
-          key={key}
-          variant="ghost"
-          colorScheme="neutral"
-          onClick={() => onNavSelect(key)}
-          className="mt-8 w-full self-center rounded-none"
-        >
-          {label}
-        </Button>
-      ))}
-    </nav>
+    <>
+      <nav className="flex-1 mt-4 max-h-[calc(100vh-20px)] overflow-y-auto overflow-x-hidden">
+        {navItems.map((item) => (
+          <Button
+            key={item.key}
+            variant="ghost"
+            colorScheme="neutral"
+            onClick={() => onNavSelect(item)}
+            className={`mt-8 w-full self-center rounded-none mt-0 ${selectedNav.key === item.key ? "text-primary font-bold bg-primary/10" : "text-neutral"}`}
+          >
+            {item.label}
+          </Button>
+        ))}
+      </nav>
+    </>
   );
 } 

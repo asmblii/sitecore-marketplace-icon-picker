@@ -1,11 +1,12 @@
 import { Input } from "./ui/input";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
+import type { Icon } from "../types";
 
 interface IconPickerProps {
   searchInput: string;
   onSearchChange: (value: string) => void;
-  filteredIcons: string[];
+  filteredIcons: Icon[];
   selectedIcon: string;
   onIconSelect: (icon: string) => void;
   onSave: () => Promise<void>;
@@ -43,19 +44,19 @@ export function IconPicker({
           )}
 
           {filteredIcons.map((icon) => (
-            <Card key={icon} 
-                  onClick={() => onIconSelect(icon)}
-                  className={`cursor-pointer h-28 flex flex-col items-center justify-center text-center gap-1 ${selectedIcon === icon ? "bg-primary/10" : ""}`}
+            <Card key={icon.name} 
+                  onClick={() => onIconSelect(icon.name)}
+                  className={`cursor-pointer h-28 flex flex-col items-center justify-center text-center gap-1 ${selectedIcon === icon.name ? "bg-primary/10" : ""}`}
                   style="outline"
                   elevation="base"
                   padding="sm">
 
-              <span className={`material-icons md-48 pointer-events-none ${selectedIcon === icon ? "text-primary" : "text-neutral"}`}>
-                {icon}
+              <span className={`material-icons md-48 pointer-events-none ${selectedIcon === icon.name ? "text-primary" : "text-neutral"}`}>
+                {icon.name}
               </span>
               
-              <small className={`text-xs text-center leading-tight break-words hyphens-auto px-1 ${selectedIcon === icon ? "text-primary font-bold" : "text-neutral"}`}>
-                {icon.replaceAll("_", " ")}
+              <small className={`text-xs text-center leading-tight break-words hyphens-auto px-1 ${selectedIcon === icon.name ? "text-primary font-bold" : "text-neutral"}`}>
+                {icon.name.replaceAll("_", " ")}
               </small>
             </Card>
           ))}
