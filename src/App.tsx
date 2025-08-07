@@ -32,7 +32,7 @@ function App() {
   const handleSave = async () => {
     setSaveStatus("saving");
     try {
-      await client?.setValue(JSON.stringify({ icon: selectedIcon }), true);
+      await client?.setValue(selectedIcon, true);
       setSaveStatus("saved");
       setTimeout(() => client?.closeApp(), 1000);
     } catch {
