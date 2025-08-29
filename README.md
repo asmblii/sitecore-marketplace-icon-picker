@@ -32,7 +32,7 @@ After configuring this application as a custom field, and storing the selected i
 
 - Follow the [Material UI Icon installation instructions](https://mui.com/material-ui/getting-started/installation/) for your Head Application.
 - Ensure the field value is returned in your Component props.
-- In your Component output the value of the custom field as a class on the dom element you want to display the icon e.g.
+- In your Component output the value of the custom field according to the Martial UI Icons usage guide e.g.
 
 ```ts
 {props.fields.Icon.value !== '' && (
