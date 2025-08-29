@@ -1,6 +1,6 @@
 # Marketplace Icon Picker
 
-A modern icon picker application for the Sitecore Marketplace, based on [Material UI Icons](https://mui.com/material-ui/material-icons/). This application provides an intuitive interface for selecting and managing icons within the Sitecore ecosystem.
+A modern icon picker application for the Sitecore Marketplace, based on [Material UI Icons](https://mui.com/material-ui/material-icons/). This is a sample application showing how you can create a custom field application.
 
 ## 📦 Running the Application Locally
 You can run this application locally, however note that it requires loading within the Sitecore Marketplace to enable full functionality.
