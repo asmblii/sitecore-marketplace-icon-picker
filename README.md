@@ -21,29 +21,11 @@ You can run this application locally, however note that it requires loading with
    npm run dev
    ```
 
-## 🔧 Development
-
-### Project Structure
-```
-src/
-├── components/
-│   └── ui/           # Reusable UI components
-├── utils/
-│   └── hooks/        # Custom React hooks
-├── lib/              # Utility functions
-└── assets/           # Static assets
-```
-
-### Key Components
-- **useMarketplaceClient** - Custom hook for Sitecore Marketplace SDK integration
-- **Button** - Reusable button component with Tailwind styling
-- **App** - Main application component with icon picker functionality
-
-
 ## 🔗 Sitecore Integration
 
 This application is designed to function using the [Custom Field extension point](https://doc.sitecore.com/mp/en/developers/marketplace/page-builder-custom-fields.html) in the Sitecore Marketplace.
 
+To test the application, you can follow the guide above to register using the Custom Field Extension Point, tied to a specific field in XM Cloud.
 
 ## 🌎 Head application integration
 After configuring this application as a custom field, and storing the selected icon in a field value. You need to perform a small integration in your head application to enable display of the selected icon.
