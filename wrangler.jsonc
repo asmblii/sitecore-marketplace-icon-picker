@@ -1,0 +1,7 @@
+{
+    "name": "sc-marketplace-site-icon-picker",
+    "compatibility_date": "2025-08-19",
+    "assets": {
+        "directory": "./dist"
+    }
+}

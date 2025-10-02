@@ -52,9 +52,7 @@ export function IconPicker({
                     elevation="base"
                     padding="sm">
 
-                <span className={`material-icons md-48 pointer-events-none ${selectedIcon === icon.name ? "text-primary" : "text-neutral"}`}>
-                  {icon.name}
-                </span>
+                <i className={`md-48 pointer-events-none icon p-5 ${icon.name} `}></i>
                 
                 <small className={`text-xs text-center leading-tight break-words hyphens-auto px-1 ${selectedIcon === icon.name ? "text-primary font-bold" : "text-neutral"}`}>
                   {icon.name.replaceAll("_", " ")}
