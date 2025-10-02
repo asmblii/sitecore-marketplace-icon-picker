@@ -20,7 +20,7 @@ function getRenderingUrl(pagesContext: PagesContext) {
         renderingUrl = renderingUrl.substring(0, renderingUrl.length - 1);
     }
 
-    renderingUrl = 'https://localhost:5000';
+    // renderingUrl = 'https://localhost:5000';
     return renderingUrl;
 }
 
