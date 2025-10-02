@@ -25,11 +25,11 @@ export function IconPicker({
   return (
     <div className="flex h-screen overflow-hidden">
       <main className="flex-1 p-6 flex flex-col overflow-hidden">
-        <Input 
+        <Input
           type="search"
           placeholder="Search icons..."
           value={searchInput}
-          onChange={(e) => { 
+          onChange={(e) => {
             onIconSelect("")
             onSearchChange(e.target.value)
           }}
@@ -37,7 +37,7 @@ export function IconPicker({
 
         <div className="flex-1 overflow-y-auto pr-3 pt-3">
           <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-3 items-start content-start">
-            
+
             {filteredIcons.length === 0 && (
               <p style={{ color: "#666", gridColumn: "1 / -1" }}>
                 No icons match your search.
@@ -45,17 +45,17 @@ export function IconPicker({
             )}
 
             {filteredIcons.map((icon) => (
-              <Card key={icon.name} 
-                    onClick={() => onIconSelect(icon.name)}
-                    className={`cursor-pointer h-28 flex flex-col items-center justify-center text-center gap-1 ${selectedIcon === icon.name ? "bg-primary/10" : ""}`}
-                    style="outline"
-                    elevation="base"
-                    padding="sm">
+              <Card key={icon.name}
+                onClick={() => onIconSelect(icon.name)}
+                className={`cursor-pointer h-28 flex flex-col items-center justify-center text-center gap-1 ${selectedIcon === icon.name ? "bg-primary/10" : ""}`}
+                style="outline"
+                elevation="base"
+                padding="sm">
 
                 <i className={`md-48 pointer-events-none icon p-5 ${icon.name} `}></i>
-                
+
                 <small className={`text-xs text-center leading-tight break-words hyphens-auto px-1 ${selectedIcon === icon.name ? "text-primary font-bold" : "text-neutral"}`}>
-                  {icon.name.replaceAll("_", " ")}
+                  {icon.title ?? icon.name.replaceAll("_", " ")}
                 </small>
               </Card>
             ))}

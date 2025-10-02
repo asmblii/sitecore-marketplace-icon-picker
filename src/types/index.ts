@@ -6,4 +6,5 @@ export interface CategoryItem {
 export interface Icon {
   name: string;
   category: string;
+  title?: string;
 }

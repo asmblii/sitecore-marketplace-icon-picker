@@ -1,8 +1,9 @@
 # Marketplace Icon Picker
 
-An icon picker application for the Sitecore Marketplace, based on [Material UI Icons](https://mui.com/material-ui/material-icons/). This is a sample application showingcasing how to create a custom field extension to be leveraged in the Sitecore Marketplace with XM Cloud.
+An icon picker application for the Sitecore Marketplace. It is based on [sample Marketplace Icon Picker by Sitecore](https://github.com/Sitecore/marketplace-icon-picker). However, this icon picker doesn't rely on Material UI Icons, instead the rendering host provide a stylesheet with icons. Hereby you can provide your own beutifull custom icons.
 
 ## 📦 Running the Application Locally
+
 You can run this application locally, however note that it requires loading within the Sitecore Marketplace to enable full functionality.
 
 1. **Clone the repository**
@@ -18,7 +19,7 @@ You can run this application locally, however note that it requires loading with
 
 3. **Start the development server**
    ```bash
-   npm run dev
+   npm start
    ```
 
 ## 🔗 Sitecore Integration
@@ -28,18 +29,36 @@ This application is designed to function using the [Custom Field extension point
 To test the application, you can follow the guide above to register the application using the Custom Field Extension Point, tied to a specific field in XM Cloud.
 
 ## 🌎 Head application integration
-After configuring this application as a custom field, and storing the selected icon in a field value. You need to perform a small integration in your head application to enable display of the selected icon.
 
-- Follow the [Material UI Icon installation instructions](https://mui.com/material-ui/getting-started/installation/) for your Head Application.
-- Ensure the field value is returned in your Component props.
-- In your Component output the value of the custom field according to the Martial UI Icons usage guide e.g.
+Your application must allow CORS from the extensions. When using Sitecore ASP.NET Core SDK this can be configured in your startup with:
 
-```ts
-{props.fields.Icon.value !== '' && (
-   <span className="material-icons">
-      <Text field={props.fields.Icon} />
-   </span>
-)}
+```csharp
+if (sitecoreSettings.EditingSecret != null)
+{
+   app.UseCors(builder =>
+   {
+         builder.WithOrigins([
+            "https://pages.sitecorecloud.io",
+            "https://sc-marketplace-html-validator.asmblii.dev",
+            "https://sc-marketplace-icon-picker.asmblii.dev",
+            ])
+         .AllowAnyMethod()
+         .WithHeaders("Content-Type", "Authorization")
+         .AllowCredentials()
+         ;
+   });
+}
+```
+
+Secondly your application must expose an endpoint at `/api/xmc-icons` at the editing host telling the extension which stylesheet to load and about the icons (unfortunately we cannot use the `cssRules` from javascript due to  sandboxing of the extension). `name` is required and is the css class that will be applied to the icon options:
+
+```json
+{
+   "stylesheet": "/dist/icons.css",
+   "icons": [
+      { "name": "icon-leafs", "category": "Sample category", "title": "Leafs" }
+   ]
+}
 ```
 
 ## 📝 License
