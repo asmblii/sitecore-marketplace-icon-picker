@@ -21,6 +21,9 @@ function getRenderingUrl(pagesContext: PagesContext) {
     }
 
     // renderingUrl = 'https://localhost:5000';
+    
+    renderingUrl += `?site=${siteInfo.name}&template=${pagesContext.pageInfo?.template.name}`;
+    
     return renderingUrl;
 }
 
