@@ -1,6 +1,17 @@
 # Marketplace Icon Picker
 
-An icon picker application for the Sitecore Marketplace. It is based on [sample Marketplace Icon Picker by Sitecore](https://github.com/Sitecore/marketplace-icon-picker). However, this icon picker doesn't rely on Material UI Icons, instead the rendering host provide a stylesheet with icons. Hereby you can provide your own beutifull custom icons.
+An icon picker application for the Sitecore Marketplace. It is based on [sample Marketplace Icon Picker by Sitecore](https://github.com/Sitecore/marketplace-icon-picker). However, this icon picker doesn't rely on Material UI Icons, instead the rendering host provide a stylesheet with icons. Hereby you can provide your own (more or less) beautifull custom icons.
+
+![Containers dialog](doc/containers.png)
+
+The head application controls which icons are listed and how it is displayed including title and categories, by providing a list of icons with css class and a stylesheet to load. The head application can even serve different result based on context site and page template as those are included as querystrings.
+
+![Head application response to manage icons available](doc/site-icon-definition.png)
+
+In the end, it is the same nice dialog as in the original Icon Picker, just with your own icons.
+
+![Icon Picker Dialog](doc/icon-picker-dialog.png)
+
 
 ## 📦 Running the Application Locally
 

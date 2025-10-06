@@ -1,0 +1,4 @@
+.structurizr
+
+# As long as we are only using automatic export, the automatically generated workspace.json is fine
+workspace.json

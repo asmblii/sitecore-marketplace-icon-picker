@@ -1,0 +1,15 @@
+{
+    "name": "Sitecore Cloud",
+    "description": "This theme includes element styles with icons for the Sitecore services",
+
+    "elements": [
+        {
+            "tag": "Sitecore XM Cloud",
+            "icon": "https://raw.githubusercontent.com/jballe/plantuml-sitecore-icons/refs/heads/master/img/sc10-cloud-archictecture/xm-cloud-200.png"
+        },
+        {
+            "tag": "Sitecore Marketplace",
+            "icon": "https://raw.githubusercontent.com/jballe/plantuml-sitecore-icons/refs/heads/master/img/sc10-cloud-archictecture/sitecore-200.png"
+        }
+    ]
+}
