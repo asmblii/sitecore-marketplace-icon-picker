@@ -12,7 +12,7 @@ interface ExtendedSiteInfo extends PagesContextSiteInfo {
     renderingEngineApplicationUrl: string;
 }
 
-function getRenderingUrl(pagesContext: PagesContext) {
+function getRenderingHostUrl(pagesContext: PagesContext) {
 
     const siteInfo = pagesContext.siteInfo as ExtendedSiteInfo;
     let renderingUrl: string = siteInfo.renderingEngineApplicationUrl;
@@ -20,10 +20,7 @@ function getRenderingUrl(pagesContext: PagesContext) {
         renderingUrl = renderingUrl.substring(0, renderingUrl.length - 1);
     }
 
-    // renderingUrl = 'https://localhost:5000';
-    
-    renderingUrl += `?site=${siteInfo.name}&template=${pagesContext.pageInfo?.template.name}`;
-    
+    // renderingUrl = 'https://localhost:5000';    
     return renderingUrl;
 }
 
@@ -42,10 +39,11 @@ export function LoadingIconsPage({ client, setIcons }: LoadingIconsPageProps) {
             return;
         }
 
-        const renderingUrl = getRenderingUrl(pagesContext);
+        const renderingHostUrl = getRenderingHostUrl(pagesContext);
+        const url = `${renderingUrl}/api/xmc-icons?site=${siteInfo.name}&template=${pagesContext.pageInfo?.template.name}`;
 
         setStateMessage('Context available, start requesting icons...')
-        fetch(`${renderingUrl}/api/xmc-icons`)
+        fetch(url)
             .then(response => response.json())
             .then((data: IconsData) => {
                 const tag = document.createElement('link');
