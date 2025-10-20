@@ -20,8 +20,7 @@ function getRenderingHostUrl(pagesContext: PagesContext) {
         renderingUrl = renderingUrl.substring(0, renderingUrl.length - 1);
     }
 
-    // renderingUrl = 'https://localhost:5000';    
-    return renderingUrl;
+    return renderingUrl.split('?', 2);
 }
 
 type IconsData = {
@@ -39,15 +38,15 @@ export function LoadingIconsPage({ client, setIcons }: LoadingIconsPageProps) {
             return;
         }
 
-        const renderingHostUrl = getRenderingHostUrl(pagesContext);
-        const url = `${renderingUrl}/api/xmc-icons?site=${siteInfo.name}&template=${pagesContext.pageInfo?.template.name}`;
+        const [renderingHostUrl, query] = getRenderingHostUrl(pagesContext);
+        const url = `${renderingHostUrl}/api/xmc-icons?site=${pagesContext.siteInfo?.name}&template=${pagesContext.pageInfo?.template.name}&${query ?? ''}`;
 
         setStateMessage('Context available, start requesting icons...')
         fetch(url)
             .then(response => response.json())
             .then((data: IconsData) => {
                 const tag = document.createElement('link');
-                tag.setAttribute('href', `${renderingUrl}/${data.stylesheet}`);
+                tag.setAttribute('href', `${renderingHostUrl}/${data.stylesheet}`);
                 tag.setAttribute('rel', 'stylesheet');
                 document.head.appendChild(tag);
 
