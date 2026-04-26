@@ -42,7 +42,9 @@ export function LoadingIconsPage({ client, setIcons }: LoadingIconsPageProps) {
         const url = `${renderingHostUrl}/api/xmc-icons?site=${pagesContext.siteInfo?.name}&template=${pagesContext.pageInfo?.template.name}&${query ?? ''}`;
 
         setStateMessage('Context available, start requesting icons...')
-        fetch(url)
+        fetch(url, {
+            credentials: 'include',
+        })
             .then(response => response.json())
             .then((data: IconsData) => {
                 const tag = document.createElement('link');
